@@ -147,6 +147,32 @@ def editDDetails(request,pk):
    else:
       return HttpResponse("Unautherised access")
    
+   
+@login_required(login_url='login') 
+@allowed_users(allowed_roles=['admin','accountant'])
+def editADetails(request,pk):
+   if(int(pk)==request.user.id):
+      user=User.objects.get(id=int(pk))
+      userI=User.objects.get(id=user.id)
+      accountant=Accountant.objects.get(user=user)
+      aform=AccountantForm(instance=accountant)
+      uform=UserForm(instance=userI)
+      if request.method=="POST":
+         aform=AccountantForm(request.POST,instance=accountant)
+         uform=UserForm(request.POST,instance=userI)
+         if aform.is_valid() and uform.is_valid():
+            aform.save()
+            uform.save()
+            return redirect('/hms/accountant/adashboard')
+      context={
+         'aform':aform,
+         'uform':uform,
+      }
+      return render(request,'editAccountantDetails.html',context)
+   else:
+      return HttpResponse("Unautherised access")
+   
+   
 @login_required(login_url='login') 
 @allowed_users(allowed_roles=['admin','patient']) 
 def bookAppointment(request,pk):

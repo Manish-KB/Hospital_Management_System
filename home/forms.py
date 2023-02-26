@@ -7,6 +7,12 @@ class DoctorForm(ModelForm):
     class Meta():
         model= Patient
         fields=['address','mobile','dob']
+        
+class AccountantForm(ModelForm):
+    class Meta():
+        model= Accountant
+        fields=['address','mobile','dob']
+        
 class PatientForm(ModelForm):
     
     class Meta():

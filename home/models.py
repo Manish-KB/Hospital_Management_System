@@ -53,7 +53,8 @@ class Doctor(models.Model):
 class Accountant(models.Model):
      user=models.OneToOneField(User,on_delete=models.CASCADE,null=True,blank=False)
      mobile = models.CharField(max_length=10,null=True)
-     
+     address = models.CharField(max_length=40,null=True)
+     dob = models.DateField(max_length=8,null=True,default=None)
      def __str__(self):
           return (self.user.first_name)
      
@@ -64,6 +65,12 @@ class Accountant(models.Model):
      @property
      def acc_id(self):
         return self.user.id
+   
+     def get_age(self):
+          if(self.dob):
+               return(datetime.date.today().year-self.dob.year) 
+          else:
+              return(" ")  
    
    
 class Appointment(models.Model):

@@ -10,6 +10,7 @@ urlpatterns = [
     path('doctor/daccountdetails/',views.dInfoPage,name='dinfo'),
     path('patient/editPDetails/<str:pk>',views.editPDetails,name='editP'),
     path('doctor/editDDetails/<str:pk>',views.editDDetails,name='editD'),
+    path('doctor/editADetails/<str:pk>',views.editADetails,name='editA'),
     path('patient/bookappointment/<str:pk>',views.bookAppointment,name='book_app'),
     path('patient/upcomingappointments/<str:pk>',views.pUpcomingApp,name='pUpApp'),
     path('patient/pastappointments/<str:pk>',views.pPastApp,name='pPApp'),
